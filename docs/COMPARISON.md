@@ -1,27 +1,27 @@
-# Comparison with the upstream runner
+# What changed in this version
 
-This document compares `elastos-node` with the upstream [`elastos/Elastos.Node`](https://github.com/elastos/Elastos.Node) `node.sh`. All observations were verified against the upstream script in the `build/skeleton` directory of that repository.
+This document compares Elastos Node for Ubuntu with the original [`elastos/Elastos.Node`](https://github.com/elastos/Elastos.Node) `node.sh`. All observations were verified against the original script in the `build/skeleton` directory of that repository.
 
 ## Summary
 
-The fork keeps the upstream data layout, binaries, daemons, and commands, and changes the security defaults, status accuracy, and operator interface. The upstream script is approximately 5,700 lines; the fork is approximately 6,700 lines.
+Elastos Node for Ubuntu keeps the original data layout, binaries, daemons, and commands, and changes the security defaults, status accuracy, and operator interface. The original script is approximately 5,700 lines; this version is approximately 6,700 lines.
 
 ## Security
 
-| Area | Upstream | This fork |
+| Area | Earlier Elastos.Node runner | Elastos Node for Ubuntu |
 |---|---|---|
 | EVM RPC binding | `--rpcaddr '0.0.0.0'` on every EVM chain; JSON-RPC reachable from the network | `127.0.0.1`, with a validated, explicit override (`EVM_RPC_BIND`) |
 | EVM WebSocket | `--wsaddr '0.0.0.0' --wsorigins '*'`, no `--wsapi` restriction | Same loopback bind as RPC |
 | Account unlock | `--unlock <account> --allow-insecure-unlock` on every mining chain; combined with the public RPC bind, this permits unauthenticated `eth_sendTransaction` from the network | Removed. Block sealing is unaffected; consensus signs with the PBFT/ELA keystore |
 | RPC API surface | Mining: `db,eth,net,pbft,personal,txpool,web3` (EID also `miner`); follower: `admin,eth,net,txpool,web3` | Mining: `eth,net,web3,txpool,pbft`; follower: `eth,net,web3,txpool` |
 | Mining rewards | Default to the node's local account unless a reward address file is created manually; no warning | Same default, but every start of a mining chain without a cold reward address prints a prominent red warning; `reward set` configures all side chains at once |
-| Script self-update | Downloads the upstream master branch with no checksum and no syntax check | Downloads this repository, verifies the published SHA-256 checksum, and runs `bash -n` before installing |
+| Script self-update | Downloads the original Elastos.Node master branch with no checksum and no syntax check | Downloads this repository, verifies the published SHA-256 checksum, and runs `bash -n` before installing |
 | Firewall | Not managed by the script | `firewall` opens only the peer and consensus ports; `harden` closes the RPC, oracle, and arbiter RPC ports, and is run automatically by `migrate` and `update_script` |
 | Hardening on update | No mechanism | `migrate` and `update_script` close the public RPC/oracle/arbiter ports automatically; `harden` reports which chains still need a restart to rebind |
 
 ## Reliability and status accuracy
 
-| Area | Upstream | This fork |
+| Area | Earlier Elastos.Node runner | Elastos Node for Ubuntu |
 |---|---|---|
 | `status` on a syncing main chain | Calls `dposv2rewardinfo` unconditionally; this RPC can panic the ELA daemon during synchronization | Gated behind a sync check; reports `N/A` until the node is synced |
 | ELA `sponsors` file | Not handled; a fresh or restored main chain stalls at approximately block 1,801,550 | Downloaded automatically at start when missing (mainnet) |
@@ -33,7 +33,7 @@ The fork keeps the upstream data layout, binaries, daemons, and commands, and ch
 
 ## Operator interface
 
-| Area | Upstream | This fork |
+| Area | Earlier Elastos.Node runner | Elastos Node for Ubuntu |
 |---|---|---|
 | Installation | Manual steps from the documentation: dependencies, swap, firewall, cron, then per-chain `init` | `setup`: one command for dependencies, swap, firewall, autostart, and `init` |
 | Deployment shape | Full stack only | `mainchain` and `full` profiles; `--profile` override per command |
@@ -46,16 +46,16 @@ The fork keeps the upstream data layout, binaries, daemons, and commands, and ch
 
 ## Migration and operations
 
-These commands have no upstream equivalent:
+These commands have no equivalent in the original Elastos.Node runner:
 
-- `migrate [--dry-run]` detects an upstream or older-fork installation, preserves the keystore, chain data, and configuration, writes rollback snapshots, and never restarts or deletes anything.
+- `migrate [--dry-run]` detects an installation from the original Elastos.Node runner or an earlier version, preserves the keystore, chain data, and configuration, writes rollback snapshots, and never restarts or deletes anything.
 - `migrate --apply` applies the hardened RPC binding by restarting stale side chains one at a time, verifying each returns on `127.0.0.1`. The ELA main chain is never restarted.
 - `uninstall` stops all processes, backs up the keystore, and removes the installation after typed confirmation.
 - `eco purge` stops the decommissioned ECO chain and its oracle and deletes their data, with a keystore backup first. It acts only on nodes where ECO is actually present; `migrate` reports such nodes.
 
 ## Unchanged by design
 
-The following are identical to upstream, which is what makes the fork a drop-in replacement on an existing node:
+The following are identical to the original Elastos.Node runner, which is what makes Elastos Node for Ubuntu a drop-in replacement on an existing node:
 
 - Directory layout (`~/node/<chain>/`), binary sources, and download URLs
 - Keystore and password file locations and formats

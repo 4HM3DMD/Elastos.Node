@@ -10,4 +10,4 @@ The fastest path is the one-line installer followed by `node.sh setup`, which pr
 2. [Installing node.sh](step-by-step-setup/installing-node.sh.md)
 3. [Running node.sh](step-by-step-setup/running-node.sh.md)
 
-For the security defaults and the port table, see [SECURITY.md](../SECURITY.md). To move an existing upstream node onto this runner, see the [migration guide](MIGRATION.md).
+For the security defaults and the port table, see [SECURITY.md](../../SECURITY.md). To move an existing upstream node onto this runner, see the [migration guide](../MIGRATION.md).

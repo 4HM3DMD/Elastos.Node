@@ -59,7 +59,7 @@ $ node.sh help
 
 {% code fullWidth="false" %}
 ```bash
-elastos-node v1.1.0 - hardened Elastos node runner
+Elastos Node for Ubuntu v1.1.0
 
 Usage:  node.sh <command> [options]
         node.sh <chain> <command> [options]
@@ -82,9 +82,9 @@ SETUP
 MANAGE
   restart            restart the profile's chains, one at a time (ela needs --force)
   update             update the chain binaries
-  migrate            move an upstream install onto this fork (--dry-run | --apply)
+  migrate            move an existing install onto this tool (--dry-run | --apply)
   uninstall          stop + remove the install (keystore backed up)
-  version | -v       fork + chain versions
+  version | -v       tool + chain versions
 
 PER-CHAIN    node.sh <chain> <command>
   start stop restart status [--json] health logs [-f] client rpc init update version
@@ -141,7 +141,7 @@ ELA also supports the governance commands `register-bpos`, `activate-bpos`, `unr
 
 ### Security and hardening
 
-EVM RPC and WebSocket endpoints bind to `127.0.0.1`, no signing account is unlocked at startup, and the RPC namespace surface is reduced. Use `firewall` to open the peer/consensus ports (RPC stays private), and `harden` to close any public RPC ports and report which chains still need a restart. For the full security model and the port table, see [SECURITY.md](../../SECURITY.md).
+EVM RPC and WebSocket endpoints bind to `127.0.0.1`, no signing account is unlocked at startup, and the RPC namespace surface is reduced. Use `firewall` to open the peer/consensus ports (RPC stays private), and `harden` to close any public RPC ports and report which chains still need a restart. For the full security model and the port table, see [SECURITY.md](../../../SECURITY.md).
 
 ### Output control
 

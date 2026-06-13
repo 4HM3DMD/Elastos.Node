@@ -27,4 +27,4 @@ Downloading https://nodejs.org/download/release/v23.10.0/node-v23.10.0-linux-x64
 OK: pg-oracle initialized
 ```
 
-The PG oracle is one of the cross-chain services in the `full` profile. It reaches the PG and ELA nodes over loopback, so its own service port is closed to the internet by the firewall (applied by `node.sh harden`, and automatically during migration and self-update). See [SECURITY.md](../../../SECURITY.md) for the port table.
+The PG oracle is one of the cross-chain services in the `full` profile. It reaches the PG and ELA nodes over loopback, so its own service port is closed to the internet by the firewall (applied by `node.sh harden`, and automatically during migration and self-update). See [SECURITY.md](../../../../SECURITY.md) for the port table.

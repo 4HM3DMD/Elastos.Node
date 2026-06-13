@@ -2,7 +2,7 @@
 
 ### 1. Install the script
 
-The fastest path runs the installer. It downloads `node.sh`, verifies the published checksum, and on a host that already runs a node migrates it onto the fork (restarting nothing):
+The fastest path runs the installer. It downloads `node.sh`, verifies the published checksum, and on a host that already runs a node migrates it onto Elastos Node for Ubuntu (restarting nothing):
 
 ```bash
 $ curl -fsSL https://raw.githubusercontent.com/4HM3DMD/Elastos.Node/master/build/skeleton/install.sh | bash
@@ -63,11 +63,11 @@ $ ~/node/node.sh harden
 
 Now the initial **setup is complete**.
 
-Please refer to [the longer edition](step-by-step-setup.md) for a more detailed setup and usage. For the security defaults and the port table, see [SECURITY.md](../SECURITY.md).
+Please refer to [the longer edition](archives/step-by-step-setup.md) for a more detailed setup and usage. For the security defaults and the port table, see [SECURITY.md](../SECURITY.md).
 
 What's next:
 
-* [See the status](step-by-step-setup/program-version-and-status.md)
+* [See the status](archives/step-by-step-setup/program-version-and-status.md)
 * [Use the client to connect](besides-setup/running-the-client.md)
 
 For any issues, please get in touch with the blockchain Dev team via [Elastos Discord](https://discord.com/invite/Rcnz2pQkZS).

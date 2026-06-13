@@ -1,6 +1,6 @@
-# Operator guide: migrating to elastos-node
+# Operator guide: migrating to Elastos Node for Ubuntu
 
-This guide moves an existing Elastos node from the official `elastos/Elastos.Node` runner (or an older version of this fork) onto the hardened fork, and then secures it. It covers two kinds of operator:
+This guide moves an existing Elastos node from the official `elastos/Elastos.Node` runner (or an earlier version) onto Elastos Node for Ubuntu, and then secures it. It covers two kinds of operator:
 
 - **Council / supernode** operators, who produce blocks and must stay above consensus quorum.
 - **Validator / full-node** operators, who run a node without that constraint.
@@ -29,7 +29,7 @@ The install step **restarts nothing**. Your chains keep running and syncing thro
 curl -fsSL https://raw.githubusercontent.com/4HM3DMD/Elastos.Node/master/build/skeleton/install.sh | bash
 ```
 
-On an existing node this verifies the published checksum, backs up your current `node.sh` to `node.sh.pre-fork.<timestamp>`, swaps in the fork, runs `migrate` (which writes the profile and a rollback snapshot and closes the public RPC firewall ports), and **restarts nothing**. On a fresh box it installs the script and points you to `node.sh setup`.
+On an existing node this verifies the published checksum, backs up your current `node.sh` to `node.sh.bak.<timestamp>`, swaps in the new script, runs `migrate` (which writes the profile and a rollback snapshot and closes the public RPC firewall ports), and **restarts nothing**. On a fresh box it installs the script and points you to `node.sh setup`.
 
 To review the installer before running it:
 
@@ -44,7 +44,7 @@ less install.sh && bash install.sh
 node.sh summary
 ```
 
-Every chain in your profile should still be running, with heights advancing. Your node is now managed by the fork, but each daemon is still running under its old flags until you restart it in Step 3.
+Every chain in your profile should still be running, with heights advancing. Your node is now managed by Elastos Node for Ubuntu, but each daemon is still running under its old flags until you restart it in Step 3.
 
 Council operators: confirm your RPC IP allow-list survived (it does; migration never edits `config.json`):
 
@@ -64,7 +64,7 @@ node.sh pg restart
 node.sh eid restart
 ```
 
-Each restart preserves chain data and brings the chain back bound to `127.0.0.1`. The **ELA main chain is never restarted** by the fork, so a producer keeps signing throughout.
+Each restart preserves chain data and brings the chain back bound to `127.0.0.1`. The **ELA main chain is never restarted** by Elastos Node for Ubuntu, so a producer keeps signing throughout.
 
 - **Council operators:** restart a given side chain on only a **few nodes at a time**, staying above two-thirds of the council, and wait for each node's chain to rejoin before doing the next batch. This keeps each side chain's consensus healthy. The main chain is untouched, so DPoS consensus is never at risk.
 - **Validator operators:** there is no quorum concern. Restart the side chains whenever each is synced.
@@ -101,19 +101,19 @@ This is detection-gated: on a node without ECO it reports that there is nothing 
 node.sh update_script
 ```
 
-This downloads the latest fork script, verifies its checksum, syntax-checks it, replaces the installed script, and re-runs the firewall hardening. Run it whenever you want the latest version.
+This downloads the latest script, verifies its checksum, syntax-checks it, replaces the installed script, and re-runs the firewall hardening. Run it whenever you want the latest version.
 
 ## Rollback
 
 The migration left two restore points:
 
-- `~/node/node.sh.pre-fork.<timestamp>` (your previous script)
+- `~/node/node.sh.bak.<timestamp>` (your previous script)
 - `~/.config/elastos.bak.<timestamp>` (your previous configuration)
 
 To revert the script:
 
 ```bash
-cp ~/node/node.sh.pre-fork.* ~/node/node.sh
+cp ~/node/node.sh.bak.* ~/node/node.sh
 ```
 
 Daemons are never stopped during migration, so a rollback does not interrupt them.

@@ -53,6 +53,6 @@ The `init` command will try to find the server's public IP automatically, and re
 $ cat ~/node/ela/config.json | jq .Configuration.DPoSConfiguration.IPAddress
 ```
 
-The ELA main-chain RPC port (`20336`) is restricted by the config IP allow-list and is closed to the internet by the firewall. The peer-to-peer and DPoS ports (`20338`/`20339`) stay open. See [SECURITY.md](../../../SECURITY.md) for the full port table.
+The ELA main-chain RPC port (`20336`) is restricted by the config IP allow-list and is closed to the internet by the firewall. The peer-to-peer and DPoS ports (`20338`/`20339`) stay open. See [SECURITY.md](../../../../SECURITY.md) for the full port table.
 
 

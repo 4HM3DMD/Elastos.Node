@@ -73,7 +73,7 @@ After the first start, run `harden` to close public access to the RPC, oracle, a
 $ ~/node/node.sh harden
 ```
 
-The EVM JSON-RPC and WebSocket endpoints bind to `127.0.0.1` (localhost only) on this fork, so they are not reachable from the network. See [SECURITY.md](../../SECURITY.md) for the full port table and the two-layer hardening model.
+The EVM JSON-RPC and WebSocket endpoints bind to `127.0.0.1` (localhost only) on this version, so they are not reachable from the network. See [SECURITY.md](../../../SECURITY.md) for the full port table and the two-layer hardening model.
 
 ### Auto-start when OS Reboots
 

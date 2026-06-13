@@ -39,4 +39,4 @@ The reward (miner) address entered here should be a cold address you control, se
 $ ~/node/node.sh reward set 0xYOURCOLDADDRESS
 ```
 
-The PG JSON-RPC and WebSocket endpoints bind to `127.0.0.1` (localhost only) and the node does not unlock a signing account for RPC. For remote access use an SSH tunnel or VPN rather than exposing the RPC port. See [SECURITY.md](../../../SECURITY.md) for details and the full port table.
+The PG JSON-RPC and WebSocket endpoints bind to `127.0.0.1` (localhost only) and the node does not unlock a signing account for RPC. For remote access use an SSH tunnel or VPN rather than exposing the RPC port. See [SECURITY.md](../../../../SECURITY.md) for details and the full port table.

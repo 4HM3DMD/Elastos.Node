@@ -1,6 +1,6 @@
 # Security
 
-> Archived note. This is a historical checklist. The authoritative security model for this fork is [SECURITY.md](../../SECURITY.md).
+> Archived note. This is a historical checklist. The authoritative security model for Elastos Node for Ubuntu is [SECURITY.md](../../SECURITY.md).
 
 基本的安全考虑。
 

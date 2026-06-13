@@ -71,4 +71,4 @@ $ ~/node/node.sh update
 [ ... many messages follow ... ]
 ```
 
-Chain binaries are downloaded from the official Elastos distribution servers. The chains updated depend on the active profile; see [Deployment profiles](../../README.md#deployment-profiles).
+Chain binaries are downloaded from the official Elastos distribution servers. The chains updated depend on the active profile; see [Deployment profiles](../../../README.md#deployment-profiles).

@@ -2,7 +2,7 @@
 
 ## Default posture
 
-`elastos-node` runs the Elastos chains with the following defaults:
+Elastos Node for Ubuntu runs the Elastos chains with the following defaults:
 
 - **Loopback-only EVM RPC.** Each EVM side chain's JSON-RPC and WebSocket endpoints bind to `127.0.0.1`. They are reachable by the node's own oracle, arbiter, and CLI over loopback, but not from the network.
 - **Local-only services firewalled.** The ela RPC (also IP allow-listed by its config), the crosschain oracle ports, and the arbiter RPC are closed to the internet by the firewall, since none of them need public access. The `harden` command applies this, and `migrate` and `update_script` run it automatically.
@@ -48,7 +48,7 @@ Ports fall into groups by role, each with its own posture.
 | Ports | Role | Posture |
 |---|---|---|
 | ela `20338`/`20339`, esc `20638`/`20639`, eid `20648`/`20649`, pg `20678`/`20679`, arbiter `20538` | Peer-to-peer and consensus | **Open** (peers and consensus require them) |
-| esc `20636`/`20635`, eid `20646`/`20645`, pg `20676`/`20675` | EVM RPC / WebSocket | Bound to `127.0.0.1` once the chain is restarted on this fork; firewall-closed until then |
+| esc `20636`/`20635`, eid `20646`/`20645`, pg `20676`/`20675` | EVM RPC / WebSocket | Bound to `127.0.0.1` once the chain is restarted (on this version); firewall-closed until then |
 | ela `20336` | Main-chain RPC | Restricted by the config IP allow-list (`WhiteIPList`) and firewall-closed |
 | oracle `20632`/`20642`/`20672`, arbiter RPC `20536` | Local-only services | Firewall-closed by `harden` (their bind is set in their own code, not in node.sh flags) |
 

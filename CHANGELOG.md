@@ -9,7 +9,7 @@ Validated end to end on a live node: one-line migration, the read views, the per
 ### Highlights
 - **Security.** Loopback-only EVM RPC, no remotely-unlockable account, reduced RPC surface, automatic firewall close of the RPC/oracle/arbiter ports on `migrate` and `update_script`, and a status command that cannot crash a syncing daemon.
 - **Operations.** One-line installer, deployment profiles (main chain only or full stack), `summary`/`health`/`status`/`logs`, staged `migrate`, `harden`, and `eco purge`.
-- **Compatibility.** Every upstream command continues to work; the directory layout, keystores, and chain data are unchanged, so the fork is a drop-in replacement.
+- **Compatibility.** Every command from the original Elastos.Node runner continues to work; the directory layout, keystores, and chain data are unchanged, so it is a drop-in replacement.
 
 See the entries below for the full path from `v0.1.0`.
 
@@ -27,7 +27,7 @@ See the entries below for the full path from `v0.1.0`.
 
 ### Added
 - `harden` command. It closes the host firewall on the RPC and WebSocket ports (`20336`, `20635/6`, `20645/6`, `20655/6`, `20675/6`) and reports which running EVM daemons are still bound to `0.0.0.0` and so need a restart to rebind to `127.0.0.1`. The firewall close is immediate, reversible, idempotent, and restarts nothing; local loopback access is unaffected.
-- `migrate` and `update_script` now run the firewall close automatically. Moving onto the fork, or updating it, immediately closes the public RPC exposure rather than leaving it open until the operator restarts the chains. The daemon rebind still requires a restart, which `harden` and the migration output both call out.
+- `migrate` and `update_script` now run the firewall close automatically. Moving onto Elastos Node for Ubuntu, or updating it, immediately closes the public RPC exposure rather than leaving it open until the operator restarts the chains. The daemon rebind still requires a restart, which `harden` and the migration output both call out.
 
   This addresses the gap where swapping the script alone changed nothing about the live exposure: the firewall layer now closes on update, and the restart layer is clearly flagged.
 
@@ -42,7 +42,7 @@ See the entries below for the full path from `v0.1.0`.
 ## v1.0.0-rc.6 - One-line installer
 
 ### Added
-- `install.sh`: a single command installs the script and, on a host that already runs a node, migrates it onto the fork.
+- `install.sh`: a single command installs the script and, on a host that already runs a node, migrates it onto Elastos Node for Ubuntu.
 
   ```
   curl -fsSL https://raw.githubusercontent.com/4HM3DMD/Elastos.Node/master/build/skeleton/install.sh | bash
@@ -51,7 +51,7 @@ See the entries below for the full path from `v0.1.0`.
   It verifies the published SHA-256 before installing, backs up an existing `node.sh`, and never touches keystores or chain data. On a fresh host it installs the script and points to `node.sh setup`; on an existing node it runs `migrate`, which restarts nothing. This replaces the previous manual download-and-rename sequence.
 
 ### Changed
-- After a successful `migrate`, the script now prints how to keep the fork updated (`node.sh update_script`).
+- After a successful `migrate`, the script now prints how to keep Elastos Node for Ubuntu updated (`node.sh update_script`).
 - Documentation leads with the one-line installer for first-time migration; the manual step-by-step procedure remains documented for operators who prefer it.
 
 ## v1.0.0-rc.5 - Simplification
@@ -107,8 +107,8 @@ Release candidate for v1.0.0. No functional script changes other than the versio
 ### Documentation
 - Rewrote `README.md` as a complete reference: installation, quick start, deployment profiles, full command tables, security model, migration, updating, file locations.
 - Rewrote `SECURITY.md`: default posture, RPC bind override, remote-access guidance, full port table, vulnerability reporting.
-- Added `docs/COMPARISON.md`: a feature and security comparison against the upstream `elastos/Elastos.Node` runner.
-- Added `docs/MIGRATION.md`: the step-by-step procedure for moving an existing installation onto this fork, including verification and rollback.
+- Added `docs/COMPARISON.md`: a feature and security comparison against the original `elastos/Elastos.Node` runner.
+- Added `docs/MIGRATION.md`: the step-by-step procedure for moving an existing installation onto Elastos Node for Ubuntu, including verification and rollback.
 - Normalized this changelog to a consistent, neutral format.
 
 ### Status
@@ -197,7 +197,7 @@ A compatibility audit against the official `elastos/Elastos.Node` confirmed that
 ## v0.8.5 - Migration command
 
 ### Added
-- `node.sh migrate [--dry-run]`: moves an existing installation (an older version of this fork, or the official `elastos/Elastos.Node`) onto this fork.
+- `node.sh migrate [--dry-run]`: moves an existing installation (an earlier version, or the official `elastos/Elastos.Node`) onto Elastos Node for Ubuntu.
   - Detects the source installation from the profile file and running processes.
   - Preserves the ELA keystore, chain data, and configuration. Aborts if `keystore.dat` is missing or `node.json` is invalid.
   - Infers and writes the deployment profile for an upstream installation.
@@ -288,9 +288,9 @@ All additions are aliases over the existing dispatch; every upstream command con
 - Suggestions for misspelled chain and command names.
 - Guided `init`: asks for the deployment profile on first run and persists the choice.
 
-## v0.1.0 - Hardened fork
+## v0.1.0 - Initial hardened release
 
-First release, forked from `elastos/Elastos.Node`.
+First release, building on `elastos/Elastos.Node`.
 
 ### Security
 - All EVM side-chain start paths bind `--rpcaddr` and `--wsaddr` to `127.0.0.1` (previously `0.0.0.0`).

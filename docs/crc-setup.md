@@ -29,7 +29,7 @@ After registering the CRC node with Essentials, complete the CRC node build with
    $ ~/node/node.sh profile set full
    ```
 
-   This installs all programs in one pass: ELA, ESC, EID, PG, the ESC/EID/PG oracles, and the arbiter. View more sample [programs](step-by-step-setup/installing-programs).
+   This installs all programs in one pass: ELA, ESC, EID, PG, the ESC/EID/PG oracles, and the arbiter. View more sample [programs](archives/step-by-step-setup/installing-programs).
 
 2. Start the node and bind the nodepublickey using Essentials:
 

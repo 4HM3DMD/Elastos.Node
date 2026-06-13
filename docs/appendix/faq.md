@@ -130,7 +130,7 @@ The possible reasons may include:
 
 * [x] **The version is out of date.**
 
-Check versions and issue an [update](../step-by-step-setup/updating-programs.md) if required.
+Check versions and issue an [update](../archives/step-by-step-setup/updating-programs.md) if required.
 
 ```bash
 $ node/node.sh status

@@ -1,13 +1,13 @@
-# elastos-node
+# Elastos Node for Ubuntu
 
-`elastos-node` is a security-hardened fork of the [`elastos/Elastos.Node`](https://github.com/elastos/Elastos.Node) runner. It manages the Elastos main chain (ELA), the EVM side chains (ESC, EID, PG), their cross-chain oracles, and the arbiter through a single `node.sh` script.
+Elastos Node for Ubuntu is the node management tool for running Elastos nodes on Ubuntu. It manages the Elastos main chain (ELA), the EVM side chains (ESC, EID, PG), their cross-chain oracles, and the arbiter through a single `node.sh` script.
 
-The fork differs from the upstream runner in two areas:
+It focuses on two areas:
 
 - **Security defaults.** JSON-RPC and WebSocket endpoints bind to `127.0.0.1`, no signing account is unlocked at startup, the exposed RPC API surface is reduced, and self-update verifies a published SHA-256 checksum. See [SECURITY.md](SECURITY.md).
 - **Deployment profiles.** A node can run the main chain only, or the full cross-chain stack. See [Deployment profiles](#deployment-profiles).
 
-All upstream commands continue to work unchanged. The fork uses the same directory layout, binaries, keystore files, and log scheme as the upstream runner, so it functions as a drop-in replacement on an existing installation. A full feature comparison is available in [docs/COMPARISON.md](docs/COMPARISON.md).
+All commands from the original Elastos.Node runner continue to work unchanged. It uses the same directory layout, binaries, keystore files, and log scheme as the previous runner, so it functions as a drop-in replacement on an existing installation. A full feature comparison is available in [docs/COMPARISON.md](docs/COMPARISON.md).
 
 ## Supported components
 
@@ -20,7 +20,7 @@ All upstream commands continue to work unchanged. The fork uses the same directo
 | `esc-oracle`, `eid-oracle`, `pg-oracle` | Cross-chain oracle services |
 | `arbiter` | Cross-chain arbiter |
 
-The decommissioned ECO and PGP side chains are excluded from all profiles and are not started by this script. A leftover ECO installation from the upstream runner can be stopped and removed with `node.sh eco purge`; the command detects whether ECO is present and does nothing on nodes without it.
+The decommissioned ECO and PGP side chains are excluded from all profiles and are not started by this script. A leftover ECO installation from the original Elastos.Node runner can be stopped and removed with `node.sh eco purge`; the command detects whether ECO is present and does nothing on nodes without it.
 
 ## Requirements
 
@@ -30,14 +30,14 @@ The decommissioned ECO and PGP side chains are excluded from all profiles and ar
 
 ## Installation
 
-One command installs the script and, on a host that already runs a node, migrates it onto the fork. It verifies the published checksum and never touches keystores or chain data:
+One command installs the script and, on a host that already runs a node, migrates it onto Elastos Node for Ubuntu. It verifies the published checksum and never touches keystores or chain data:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/4HM3DMD/Elastos.Node/master/build/skeleton/install.sh | bash
 ```
 
 - On a **fresh host** it installs `node.sh` and points you to `node.sh setup`.
-- On an **existing node** (upstream or an older fork) it backs up the old `node.sh`, swaps in the fork, and runs `migrate` (which restarts nothing).
+- On an **existing node** (the original Elastos.Node runner or an earlier version) it backs up the old `node.sh`, swaps in the new script, and runs `migrate` (which restarts nothing).
 
 To review the installer before running it, download it first:
 
@@ -122,7 +122,7 @@ node.sh ela status
 | `firewall` | Open the peer/consensus ports for the active profile |
 | `harden` | Close public access to the RPC, oracle, and arbiter ports; report any chain that still needs a restart |
 | `reward [set <0x..>]` | Show or set the cold mining reward address for all side chains |
-| `migrate [--dry-run]` | Move an existing upstream or older-fork installation onto this fork |
+| `migrate [--dry-run]` | Move an existing installation (the original Elastos.Node runner or an earlier version) onto Elastos Node for Ubuntu |
 | `migrate --apply [--yes]` | Staged restart that applies the hardened RPC binding (side chains only) |
 | `uninstall` | Stop all processes and remove the installation (keystore backed up first) |
 | `version` / `-v` | Script and chain versions |
@@ -148,7 +148,7 @@ where `<chain>` is one of `ela`, `esc`, `esc-oracle`, `eid`, `eid-oracle`, `pg`,
 | `compress_log`, `remove_log` | Log maintenance |
 | `purge` (eco only) | Stop eco and eco-oracle and delete their data; keystore backed up first |
 
-ELA additionally supports the governance commands from the upstream runner: `register_bpos`, `activate_bpos`, `unregister_bpos`, `vote_bpos`, `stake_bpos`, `unstake_bpos`, `claim_bpos`, `register_crc`, `activate_crc`, `unregister_crc`, `send`, `transfer`. Commands may be written in kebab-case (`register-bpos`) or snake_case (`register_bpos`).
+ELA additionally supports the governance commands from the original Elastos.Node runner: `register_bpos`, `activate_bpos`, `unregister_bpos`, `vote_bpos`, `stake_bpos`, `unstake_bpos`, `claim_bpos`, `register_crc`, `activate_crc`, `unregister_crc`, `send`, `transfer`. Commands may be written in kebab-case (`register-bpos`) or snake_case (`register_bpos`).
 
 ### Output control
 
@@ -176,7 +176,7 @@ For remote monitoring, use an SSH tunnel or VPN rather than exposing RPC ports.
 
 ## Migrating an existing node
 
-The `migrate` command moves an installation running the upstream `node.sh`, or an older version of this fork, onto the current version. It preserves the keystore, chain data, and configuration, writes a rollback snapshot, and never restarts or deletes anything by itself.
+The `migrate` command moves an installation running the original Elastos.Node `node.sh`, or an earlier version, onto the current version. It preserves the keystore, chain data, and configuration, writes a rollback snapshot, and never restarts or deletes anything by itself.
 
 ```bash
 node.sh migrate --dry-run    # preview, changes nothing
@@ -188,7 +188,7 @@ node.sh migrate --apply      # staged side-chain restarts to apply the hardened 
 
 ## Updating
 
-Once a node is on the fork, a single command keeps the script current:
+Once a node is on Elastos Node for Ubuntu, a single command keeps the script current:
 
 ```bash
 node.sh update_script
@@ -219,8 +219,8 @@ Releases are tagged `vMAJOR.MINOR.PATCH` and documented in [CHANGELOG.md](CHANGE
 
 ## License
 
-See [LICENSE](LICENSE).
+This project builds on the [Elastos.Node](https://github.com/elastos/Elastos.Node) project and follows its licensing. See the Elastos.Node repository for the license terms.
 
 ## Acknowledgements
 
-Derived from [`elastos/Elastos.Node`](https://github.com/elastos/Elastos.Node). The upstream runner is the work of the Elastos contributors. This repository adds the security hardening, deployment profiles, migration tooling, and operator interface documented above.
+Elastos Node for Ubuntu builds on the [`elastos/Elastos.Node`](https://github.com/elastos/Elastos.Node) tooling created by the Elastos contributors. It adds the security hardening, deployment profiles, migration tooling, and operator interface documented above.

@@ -7,7 +7,7 @@ $ ~/node/node.sh
 ```
 
 ```bash
-elastos-node v1.1.0 - hardened Elastos node runner
+Elastos Node for Ubuntu v1.1.0
 
 Usage:  node.sh <command> [options]
         node.sh <chain> <command> [options]
@@ -30,16 +30,16 @@ SETUP
 MANAGE
   restart            restart the profile's chains, one at a time (ela needs --force)
   update             update the chain binaries
-  migrate            move an upstream install onto this fork (--dry-run | --apply)
+  migrate            move an existing install onto this tool (--dry-run | --apply)
   uninstall          stop + remove the install (keystore backed up)
-  version | -v       fork + chain versions
+  version | -v       tool + chain versions
 ```
 
 To list the installed chain binary **versions**, run `version`:
 
 ```bash
 $ ~/node/node.sh version
-elastos-node v1.1.0  (hardened fork of elastos/Elastos.Node)
+Elastos Node for Ubuntu v1.1.0
 
   ela     v0.9.5
   esc     84b1c5e

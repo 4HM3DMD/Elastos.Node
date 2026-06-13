@@ -2,14 +2,14 @@
 
 ## One-line install (recommended)
 
-One command installs the script. On a host that already runs a node, it also migrates that node onto this runner. It verifies the published SHA-256 checksum and never touches keystores or chain data:
+One command installs the script. On a host that already runs a node, it also migrates that node onto Elastos Node for Ubuntu. It verifies the published SHA-256 checksum and never touches keystores or chain data:
 
 ```bash
 $ curl -fsSL https://raw.githubusercontent.com/4HM3DMD/Elastos.Node/master/build/skeleton/install.sh | bash
 ```
 
 - On a **fresh host** it installs `node.sh` into `~/node` and points you to `node.sh setup`.
-- On an **existing node** (upstream or an older fork) it backs up the old `node.sh`, swaps in the fork, and runs `migrate`, which restarts nothing.
+- On an **existing node** (the original Elastos.Node runner or an earlier version) it backs up the old `node.sh`, swaps in Elastos Node for Ubuntu, and runs `migrate`, which restarts nothing.
 
 To review the installer before running it, download it first:
 

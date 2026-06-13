@@ -8,7 +8,7 @@ $ ~/node/node.sh update_script
 
 The older name `script_update` still works as an alias.
 
-`update_script` downloads the latest `node.sh` from this fork, verifies it against the published `node.sh.sha256` checksum, runs a syntax check, and only then replaces the installed script. After updating, it re-runs the firewall hardening so any newly added RPC ports are closed in the same step. If the checksum does not match, or the download fails the syntax check, the update is refused and the existing script is left untouched.
+`update_script` downloads the latest `node.sh` from Elastos Node for Ubuntu, verifies it against the published `node.sh.sha256` checksum, runs a syntax check, and only then replaces the installed script. After updating, it re-runs the firewall hardening so any newly added RPC ports are closed in the same step. If the checksum does not match, or the download fails the syntax check, the update is refused and the existing script is left untouched.
 
 ```bash
 Downloading https://raw.githubusercontent.com/4HM3DMD/Elastos.Node/master/build/skeleton/node.sh...

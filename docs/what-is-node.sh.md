@@ -1,6 +1,6 @@
 # node.sh
 
-**node.sh** is a wrapper script to help you manage your Elastos nodes relatively easily. This documentation covers the security-hardened fork at [`4HM3DMD/Elastos.Node`](https://github.com/4HM3DMD/Elastos.Node), a v1.1 of the runner that binds RPC to loopback, unlocks no account at startup, and verifies a checksum on self-update. See [SECURITY.md](../SECURITY.md) for the full security model.
+**node.sh** is a wrapper script to help you manage your Elastos nodes relatively easily. This documentation covers Elastos Node for Ubuntu ([`4HM3DMD/Elastos.Node`](https://github.com/4HM3DMD/Elastos.Node)), a v1.1 of the runner that binds RPC to loopback, unlocks no account at startup, and verifies a checksum on self-update. See [SECURITY.md](../SECURITY.md) for the full security model.
 
 To setup, manage or operate an Elastos node, you may have to do the following deployment works:
 
@@ -18,7 +18,7 @@ We wish to share a basic and effective way to manage a node. It is for entry-lev
 
 node.sh integrates some frequently-used operations and provides a command-line interface in an all-in-one, intuitive, and consistent way.
 
-The fastest way to install it on a fresh host is the one-liner, which also migrates an existing node onto the fork without touching keystores or chain data:
+The fastest way to install it on a fresh host is the one-liner, which also migrates an existing node onto Elastos Node for Ubuntu without touching keystores or chain data:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/4HM3DMD/Elastos.Node/master/build/skeleton/install.sh | bash
