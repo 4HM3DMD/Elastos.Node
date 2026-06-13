@@ -1,32 +1,10 @@
 # Installing Elastos Carrier Bootstrap
 
-Running the following command to install and configure Elastos Carrier Bootstrap.
+The Carrier bootstrap node is not managed by this runner. `node.sh` covers the Elastos main chain (`ela`), the EVM side chains (`esc`, `eid`, `pg`), their cross-chain oracles, and the `arbiter`. There is no `carrier` chain in `node.sh`, and it is not part of either deployment profile, so `node.sh carrier init` is not a valid command.
 
-```bash
-$ ~/node/node.sh carrier init
-```
+To run a Carrier bootstrap node, use the Carrier project directly:
 
-```bash
-Finding the latest carrier release...
-INFO: Latest version: 6.0.1
-Downloading https://download.elastos.io/elastos-carrier/elastos-carrier-6.0.1/elastos-carrier-6.0.1-linux-x86_64.tgz...
-###################################################################### 100.0%
-Extracting elastos-carrier-6.0.1-linux-x86_64.tgz...
-'/home/ubuntu/node/.node-upload/carrier/usr/bin/ela-bootstrapd' -> '/home/ubuntu/node/carrier/ela-bootstrapd'
-Creating carrier config file...
-mkdir: created directory '/home/ubuntu/node/carrier/var'
-mkdir: created directory '/home/ubuntu/node/carrier/var/lib'
-mkdir: created directory '/home/ubuntu/node/carrier/var/lib/ela-bootstrapd'
-mkdir: created directory '/home/ubuntu/node/carrier/var/lib/ela-bootstrapd/db'
-mkdir: created directory '/home/ubuntu/node/carrier/var/run'
-mkdir: created directory '/home/ubuntu/node/carrier/var/run/ela-bootstrapd'
-INFO: carrier config file: /home/ubuntu/node/carrier/bootstrapd.conf
-OK: carrier initialized
-```
+- Carrier project: [https://github.com/elastos/Elastos.NET.Carrier.Bootstrap](https://github.com/elastos/Elastos.NET.Carrier.Bootstrap)
+- Binary releases: [https://download.elastos.io/elastos-carrier](https://download.elastos.io/elastos-carrier)
 
-The `init` command will try to find the server's public IP automatically, and record the result in carrier config file. You can check it by running: 
-
-```bash
-$ cat ~/node/carrier/bootstrapd.conf | grep external_ip
-```
-
+For the programs this runner does install, see the per-program pages for `ela`, `esc`, `esc-oracle`, `eid`, `eid-oracle`, `pg`, `pg-oracle`, and `arbiter`.

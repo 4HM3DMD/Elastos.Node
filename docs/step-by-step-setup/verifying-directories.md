@@ -1,13 +1,13 @@
 # Verifying Directories
 
-Installing **tree** utility to list contents of directories in a tree-like format.
+Installing the **tree** utility to list the contents of directories in a tree-like format.
 
 ```bash
 $ sudo apt-get install -y tree
 [ ... many outputs ... ]
 ```
 
-Currently, if all things work well, we have the following directory.
+The exact set of directories depends on the active profile. A `full`-profile node, once initialized, has the layout below. A `mainchain`-profile node has only `ela` and `node.sh`.
 
 ```bash
 $ tree -L 2 ~/node
@@ -19,38 +19,45 @@ $ tree -L 2 ~/node
 │   ├── elastos_arbiter             # running data and logs (*)
 │   └── keystore.dat                # keystore file, copied from ela
 │
-├── carrier                         # carrier bootstrap folder
-│   ├── bootstrapd.conf             # config file
-│   ├── ela-bootstrapd              # daemon program
-│   └── var                         # running data (*)
-│
-├── eid                             # eid folder
-│   ├── data                        # running data and logs (*)
+├── eid                             # eid (Identity Chain) folder
+│   ├── data                        # running data, keystore, logs (*)
 │   ├── eid                         # daemon and client program
 │   └── logs                        # log files (*)
 │
 ├── eid-oracle                      # eid-oracle folder
 │   └── *.js
 │
-├── ela                             # ela folder
+├── ela                             # ela (main chain) folder
 │   ├── config.json                 # config file
 │   ├── ela                         # daemon program
 │   ├── ela-cli                     # client program, to send commands to ela chain
 │   ├── elastos                     # chain data and log (*)
 │   └── keystore.dat                # keystore file, the wallet
 │
-├── esc                             # esc folder
-│   ├── data                        # running data and logs (*)
+├── esc                             # esc (Smart Chain) folder
+│   ├── data                        # running data, keystore, logs (*)
 │   ├── esc                         # daemon and client program
 │   └── logs                        # log files (*)
 │
 ├── esc-oracle                      # esc-oracle folder
 │   └── *.js
 │
+├── pg                              # pg (PGA Chain) folder
+│   ├── data                        # running data, keystore, logs (*)
+│   ├── pg                          # daemon and client program
+│   └── logs                        # log files (*)
+│
+├── pg-oracle                       # pg-oracle folder
+│   └── *.js
+│
 ├── extern
-│   └── node-v14.17.0-linux-x64     # nodejs required by esc-oracle and eid-oracle
+│   └── node-v23.10.0-linux-x64     # nodejs required by the oracle services
 │
 └── node.sh                         # the operating script
 ```
 
-Please some directories marked with asterisks are running data and logs files, which will be generated during the program running.
+The directories marked with an asterisk hold running data and log files, which are generated while the programs run.
+
+For each EVM side chain (`esc`, `eid`, `pg`), the `data` directory also holds the chain's keystore (`data/keystore/`) and, on a mining node, the cold reward address recorded in `data/miner_address.txt`.
+
+The decommissioned ECO and PGP side chains are not part of any profile and are not created by this script. A leftover `eco`/`eco-oracle` directory from an older install can be removed with `node.sh eco purge`.
